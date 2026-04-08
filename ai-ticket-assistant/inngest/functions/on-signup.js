@@ -39,6 +39,6 @@ export const onUserSignup =  inngest.createFunction(
             return {success: false}
         }
 
-       }
-    
-)
+       }) ;
+
+      
