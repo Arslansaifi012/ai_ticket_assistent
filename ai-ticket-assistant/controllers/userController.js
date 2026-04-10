@@ -78,3 +78,47 @@ export const signup = async(req, res) =>{
             res.status(500).json({success:false, message:error.message})
         }
        }
+
+       export const updateUser = async(req, res) =>{
+        
+        const {skills = [], role, email} = req.body ;
+        try {
+            if (req.user?.role !== "admin") {
+                return res.status(403).json({error:"Forbidden"})
+            }
+
+            const user = await userModel.findOne({email}) ;
+
+            if (!user) {
+                return res.json({success:false, message:"User not found"}) ;
+            }
+
+            await userModel.updateOne(
+                {email},
+                {skills:skills.length ? skills : user.skills, role}
+            ) ;
+
+            return res.json({success:true, message:"User updated successfull"})
+
+        } catch (error) {
+            console.log('updateUer_error', error.message);
+            return res.json({success:false, message:error.message})
+        }
+
+       } ;
+
+
+       export const getUser = async(req, res) =>{
+        try {
+            if (req.user.role !== "admin") {
+                 return res.status(403).json({error:"Forbidden"})
+            }
+
+            const user = await userModel.find().select("-password") ;
+            return res.json({success:true, user}) ;
+            
+        } catch (error) {
+            console.log('geyUer_error', error.message);
+            return res.json({success:false, message:error.message})
+        }
+       }

@@ -31,7 +31,6 @@ export const onUserSignup =  inngest.createFunction(
                
                 await sendMail(user.mail, subject, message) ;
             }) ;
-
             return {success:true}
             
         } catch (error) {
