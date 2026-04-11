@@ -9,7 +9,7 @@ import { err } from "inngest/types";
 export const signup = async(req, res) =>{
     const {email, password, skills = []} = req.body ;
     try {
-        const hashedPassword = bcrypt.hash(password, 10) ;
+        const hashedPassword = await bcrypt.hash(password, 10) ;
         const user = await userModel.create({email, password:hashedPassword, skills}) ;
 
         // fire inngest event 
@@ -35,7 +35,7 @@ export const signup = async(req, res) =>{
         const {email, password} = req.body ;
 
         try {
-          const user = userModel.findOne({email});
+          const user = await userModel.findOne({email});
 
           if (!user) {
                   return res.status(401).json({ error: "User not found with this email" });
@@ -79,8 +79,8 @@ export const signup = async(req, res) =>{
         }
        }
 
+
        export const updateUser = async(req, res) =>{
-        
         const {skills = [], role, email} = req.body ;
         try {
             if (req.user?.role !== "admin") {
