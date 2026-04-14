@@ -27,6 +27,7 @@ export const onTicketCreated = inngest.createFunction(
             });
 
             await step.run("update-ticket-status", async () =>{
+                
                 await tickteModel.findByIdAndUpdate(ticket._id,{status:'TODO'})
             }) ;
 
