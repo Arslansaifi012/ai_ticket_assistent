@@ -1,16 +1,21 @@
 
 
 import { eventType, NonRetriableError } from 'inngest'
-import userModel from '../../models/user'
-import tickteModel from '../../models/ticket'
-import { sendMail } from '../../utils/nodeMailer'
-import {inngest} from '../client'
-import analyzeTicket from '../../utils/ai'
+import userModel from '../../models/user.js'
+import tickteModel from '../../models/ticket.js'
+import { sendMail } from '../../utils/nodeMailer.js'
+import {inngest} from '../client.js'
+import analyzeTicket from '../../utils/ai.js'
 
 
 export const onTicketCreated = inngest.createFunction(
-    {id:'on-create-ticket', retries:2},
-    {event:'ticket/created'},
+    {
+        id:'on-create-ticket', 
+        retries:2,
+        event:'ticket/created'
+
+    },
+    
 
     async({event, step})=>{
         const {ticketId} = event.data
