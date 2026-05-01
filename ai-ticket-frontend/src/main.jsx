@@ -1,9 +1,9 @@
 
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import App from './App.jsx'
-import { BrowserRouter } from 'react-router-dom'
-import checkAuth from './components/checkAuth.jsx'
+// import App from './App.jsx'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import CheckAuth from './components/CheckAuth.jsx'
 import TicketDetailsPage from './pages/ticket.jsx'
 import Login from './pages/login.jsx'
 import Signup from './pages/signup.jsx'
@@ -14,36 +14,36 @@ createRoot(document.getElementById('root')).render(
     <BrowserRouter>
     <Routes>
         <Route path='/tickets/:id' element={
-            <checkAuth protected={true}>
+            <CheckAuth protected={true}>
                <TicketDetailsPage/>
-            </checkAuth>
+            </CheckAuth>
         
     }     
         />
 
 
          <Route path='/login' element={
-            <checkAuth protected={false}>
+            <CheckAuth protected={false}>
               <Login />
-            </checkAuth>
+            </CheckAuth>
         
     }     
         />
 
 
            <Route path='/signup' element={
-            <checkAuth protected={false}>
+            <CheckAuth protected={false}>
              <Signup />
-            </checkAuth>
+            </CheckAuth>
         
     }     
         />
 
 
            <Route path='/admin' element={
-            <checkAuth protected={true}>
+            <CheckAuth protected={true}>
              <Admin />
-            </checkAuth>
+            </CheckAuth>
         
     }     
         />

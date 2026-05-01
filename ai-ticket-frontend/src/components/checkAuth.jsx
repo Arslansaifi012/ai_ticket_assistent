@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-const checkAuth = ({children, protectRoute}) => {
+const CheckAuth = ({children, protectRoute}) => {
     const navigate = useNavigate() ;
     const [loading, setLoading] = useState(true) ;
     useEffect(() => {
@@ -31,4 +31,4 @@ const checkAuth = ({children, protectRoute}) => {
     }
 }
 
-export default checkAuth 
+export default CheckAuth 
